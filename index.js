@@ -111,13 +111,13 @@ app.post("/repos", (req, res) => {
     });
 });
 
-if (process.env.NODE_ENV === "production") {
-  console.log("production");
-  app.use(express.static("task/build"));
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "task/build/index.html"));
-  });
-}
+//if (process.env.NODE_ENV === "production") {
+console.log("production");
+app.use(express.static("task/build"));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "task/build/index.html"));
+});
+//}
 
 app.listen(process.env.PORT || 2000, () => {
   console.log("listenning  ", process.env.PORT || 2000);
