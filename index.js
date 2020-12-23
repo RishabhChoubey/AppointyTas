@@ -83,17 +83,32 @@ app.post("/auth", (req, res) => {
     });
   console.log("enter1");
 });
-app.post("/repos", (req, res) => {
+
+app.post("/user", (req, res) => {
   fetch(`https://api.github.com/graphql`, {
     method: "POST",
     body: JSON.stringify({
       query: `
-     mutation {
-  
-  updateRepository(input: {repositoryId: "MDEwOlJlcG9zaXRvcnkyNTY3MjAwMzM=", name: "card2"}) {
-    clientMutationId
+
+{
+  viewer {
+    login
+    email
+    createdAt
+    bio
+    avatarUrl
+    followers {
+      totalCount
+    }
+    following {
+      totalCount
+    }
+    
   }
 }
+
+
+
       `,
     }),
     headers: {
@@ -103,7 +118,50 @@ app.post("/repos", (req, res) => {
   })
     .then((res) => res.json())
     .then((data) => {
-      console.log(res);
+      console.log(data);
+      return res.json(data.data);
+    })
+    .catch((error) => {
+      return res.json(error);
+    });
+});
+
+app.post("/repo", (req, res) => {
+  console.log(req.body.page);
+  fetch(`https://api.github.com/graphql`, {
+    method: "POST",
+    body: JSON.stringify({
+      query: `
+{
+  viewer {
+    repositories(first: ${req.body.page}, orderBy: {field: CREATED_AT, direction: DESC}) {
+      pageInfo {
+        hasNextPage
+      }
+      edges {
+        node {
+          id
+          createdAt
+          name
+          url
+        }
+      }
+    }
+  }
+}
+
+
+
+      `,
+    }),
+    headers: {
+      Authorization: "token " + req.body.token,
+      "Content-Type": "applicaation/json",
+    },
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
       return res.json(data);
     })
     .catch((error) => {
@@ -111,13 +169,138 @@ app.post("/repos", (req, res) => {
     });
 });
 
-//if (process.env.NODE_ENV === "production") {
-console.log("production");
-app.use(express.static("task/build"));
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "task/build/index.html"));
+app.post("/repoDetail", (req, res) => {
+  console.log(req.body.id);
+  fetch(`https://api.github.com/graphql`, {
+    method: "POST",
+    body: JSON.stringify({
+      query: ` 
+{
+  viewer {
+    repository(name: "${req.body.id}") {
+      id
+      createdAt
+      name
+      pushedAt
+      url
+      updatedAt
+      description
+      collaborators(first: 10) {
+        edges {
+          node {
+            id
+            login
+            name
+          }
+        }
+      }
+    }
+  }
+}
+
+
+      `,
+    }),
+    headers: {
+      Authorization: "token " + req.body.token,
+      "Content-Type": "applicaation/json",
+    },
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+      return res.json(data.data);
+    })
+    .catch((error) => {
+      return res.json(error);
+    });
 });
-//}
+
+app.post("/update", (req, res) => {
+  console.log(req.body.id);
+  fetch(`https://api.github.com/graphql`, {
+    method: "POST",
+    body: JSON.stringify({
+      query: ` 
+mutation {
+  updateRepository(input: {repositoryId: "${req.body.id}" , description: "${req.body.des}", name: "${req.body.name}"})
+ {
+    clientMutationId
+  }
+}
+
+
+
+      `,
+    }),
+    headers: {
+      Authorization: "token " + req.body.token,
+      "Content-Type": "applicaation/json",
+    },
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+      return res.json(data);
+    })
+    .catch((error) => {
+      return res.json(error);
+    });
+});
+
+app.post("/issue", (req, res) => {
+  console.log(req.body.id);
+  fetch(`https://api.github.com/graphql`, {
+    method: "POST",
+    body: JSON.stringify({
+      query: ` 
+
+{
+  viewer {
+    repository(name: "${req.body.id}") {
+      name
+      issues(first: 10) {
+        nodes {
+          id
+          title
+          body
+          createdAt
+          author {
+            login
+          }
+        
+          
+        }
+      }
+    }
+  }
+}
+
+
+      `,
+    }),
+    headers: {
+      Authorization: "token " + req.body.token,
+      "Content-Type": "applicaation/json",
+    },
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+      return res.json(data);
+    })
+    .catch((error) => {
+      return res.json(error);
+    });
+});
+
+if (process.env.NODE_ENV === "production") {
+  console.log("production");
+  app.use(express.static("task/build"));
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "task/build/index.html"));
+  });
+}
 
 app.listen(process.env.PORT || 2000, () => {
   console.log("listenning  ", process.env.PORT || 2000);
