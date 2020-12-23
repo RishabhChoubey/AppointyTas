@@ -28,3 +28,21 @@
   color: white;
   letter-spacing: 5px;
 }
+
+.icon {
+  animation-name: ani;
+  animation-duration: 5s;
+  animation-timing-function: linear;
+
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+@keyframes ani {
+  0% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(0.9) translateY(-10px);
+  }
+}

@@ -1,0 +1,14 @@
+import usericon from "./user.svg";
+import updateicon from "./edit.svg";
+import editicon from "./edit-2.svg";
+import logouticon from "./log-out.svg";
+import loginicon from "./log-in.svg";
+import cancelicon from "./x-circle.svg";
+import giticon from "./github.svg";
+export const UserIcon = usericon;
+export const EditIcon = editicon;
+export const UpdateIcon = updateicon;
+export const LogoutIcon = logouticon;
+export const LoginIcon = loginicon;
+export const CancelIcon = cancelicon;
+export const GitIcon = giticon;

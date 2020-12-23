@@ -4,6 +4,7 @@ import Axios from "axios";
 import Cookies, { set } from "js-cookie";
 import Message from "./Message";
 import { Link } from "react-router-dom";
+import { EditIcon, UpdateIcon, CancelIcon } from "../icon/Icon";
 
 const RepoDetail = (props) => {
   const [repo, setrepo] = useState();

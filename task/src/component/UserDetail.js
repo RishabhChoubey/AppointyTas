@@ -3,15 +3,28 @@ import Style from "./Container.module.css";
 import Message from "./Message";
 import Axios from "axios";
 import Cookies from "js-cookie";
+import { User } from "feather-icons-react";
+import { UserIcon, LogoutIcon } from "../icon/Icon";
+import { useHistory } from "react-router-dom";
 
 const UsrDetail = () => {
   const [viewer, setviewer] = useState({});
   const token = Cookies.getJSON("token");
+  console.log("token", token);
+  const history = useHistory();
   useEffect(() => {
+    if (!token) {
+      history.push("/");
+    }
     Axios.post("http://localhost:2000/user", {
       token: token,
     }).then((data) => setviewer(data.data.viewer));
   }, []);
+
+  const logout = () => {
+    Cookies.remove("token");
+    history.push("/");
+  };
 
   return (
     <React.Fragment>
@@ -22,10 +35,15 @@ const UsrDetail = () => {
             <div className={Style.user_name}>{viewer.login}</div>
             <div className={Style.bio}>{viewer.bio}</div>
             <div className={Style.follower}>
+              <img src={UserIcon} className={Style.icon} />
               {viewer.followers.totalCount} follower
             </div>
             <div className={Style.following}>
+              <img src={UserIcon} className={Style.icon} />{" "}
               {viewer.following.totalCount} following
+            </div>
+            <div className={Style.logout} onClick={() => logout()}>
+              <img src={LogoutIcon} className={Style.icon} /> Logout
             </div>
           </div>
         </div>

@@ -1,10 +1,19 @@
 import React, { useState, useEffect, Fragment } from "react";
-
+import Cookies from "js-cookie";
 import Style from "./Container.module.css";
 import Repo from "./Repo";
 import UserDetail from "./UserDetail";
+import { useHistory } from "react-router-dom";
 
 const Container = (props) => {
+  const token = Cookies.getJSON("token");
+  const history = useHistory();
+
+  useEffect(() => {
+    if (!token) {
+      history.push("/");
+    }
+  }, []);
   return (
     <div className={Style.container}>
       <div className={Style.circle}></div>

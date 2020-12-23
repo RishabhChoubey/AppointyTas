@@ -15,6 +15,10 @@ const Repo = (props) => {
   const [paginate, setpaginate] = useState(true);
   const history = useHistory();
   useEffect(() => {
+    if (!token) {
+      history.push("/");
+    }
+
     if (loading) loadmore();
   }, [loading]);
 

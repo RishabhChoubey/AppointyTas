@@ -8,6 +8,7 @@
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.6.0",
     "axios": "^0.21.0",
+    "feather-icons-react": "^0.4.1",
     "js-cookie": "^2.2.1",
     "lodash.debounce": "^4.0.8",
     "node-fetch": "^2.6.1",
