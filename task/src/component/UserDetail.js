@@ -18,7 +18,7 @@ const UsrDetail = () => {
     if (!token) {
       history.push("/");
     }
-    Axios.post("http://localhost:2000/user", {
+    Axios.post("/user", {
       token: token,
     }).then((data) => setviewer(data.data.viewer));
   }, []);

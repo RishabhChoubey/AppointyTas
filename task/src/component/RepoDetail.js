@@ -37,7 +37,7 @@ const RepoDetail = (props) => {
   ////////////////////////////////////////REPOSITORY FETCH METHOD//////////////////////////
 
   const detail = async () => {
-    const { data } = await Axios.post("http://localhost:2000/repoDetail", {
+    const { data } = await Axios.post("/repoDetail", {
       token: token,
       id: id,
     });
