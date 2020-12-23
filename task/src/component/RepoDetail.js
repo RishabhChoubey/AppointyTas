@@ -120,7 +120,9 @@ const RepoDetail = (props) => {
             {" Updated At "}
             {repo.updatedAt.substring(0, 10)}
           </div>
-          <div className={Style.url}>{repo.url}</div>
+          <div className={Style.url}>
+            <a href={repo.url}>Github Link</a>
+          </div>
           <div className={Style.collb}>collabarators</div>
           <div>
             {" "}
