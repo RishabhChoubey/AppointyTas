@@ -9,19 +9,23 @@ const IssuePage = (props) => {
   const id = props.match.params.id;
   const [issue, setissue] = useState();
 
+  /////////////////////////////////////USE EFFECT//////////////////////////////////////////
+
   useEffect(() => {
     issueLoad();
   }, []);
 
+  ///////////////////////////////////// ISSUE LAODING//////////////////////////////////////////
+
   const issueLoad = async () => {
-    const { data } = await Axios.post("http://localhost:2000/issue", {
+    const { data } = await Axios.post("/issue", {
       token: token,
       id: id,
     });
-    console.log(data.data.viewer);
+
     if (data.data.viewer.repository) setissue(data.data.viewer.repository);
   };
-  console.log(issue, "issue");
+
   return (
     <div className={Style.container}>
       <div className={Style.circle}></div>

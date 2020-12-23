@@ -7,13 +7,15 @@ import Style from "./Login.module.css";
 import { LoginIcon, GitIcon } from "../icon/Icon";
 const Login = (props) => {
   const value = queryString.parse(props.location.search);
-  console.log(props.location);
+
   const code = value.code;
-  console.log("code", code);
+
+  /////////////////////////////////////USE EFFECT//////////////////////////////////////////
+
   useEffect(() => {
     if (code) {
       Axios.post(
-        "http://localhost:2000/auth",
+        "/auth",
         {
           client_id: "893aad47e9596025d42c",
           client_secret: "16ac8e8a8c7722bc22d9a3580abfccc1ec257074",

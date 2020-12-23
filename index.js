@@ -7,12 +7,8 @@ const fetch = require("node-fetch");
 const FormData = require("form-data");
 const { json } = require("body-parser");
 
-// const fs = require("fs");
-// var compression = require("compression");
-// let memCache = new cache.Cache();
-
 const app = express();
-///////////////middleware
+///////////////middleware//////////////////////////////////////////////////
 
 app.use(cors());
 
@@ -22,37 +18,8 @@ app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   next();
 });
-// app.use(compression());
 
-// let cacheMiddleware = (duration) => {
-//   return (req, res, next) => {
-//     let key = "__express__" + req.originalUrl || req.url;
-//     let cacheContent = memCache.get(key);
-//     if (cacheContent) {
-//       res.send(cacheContent);
-//       return;
-//     } else {
-//       res.sendResponse = res.send;
-//       res.send = (body) => {
-//         memCache.put(key, body, duration * 1000);
-//         res.sendResponse(body);
-//       };
-//       next();
-//     }
-//   };
-// };
-
-// }
-// app.use("/uploads", express.static(path.join(__dirname, "./uploads")));
-// app.use("/api/uploads", upload);
-
-// if (process.env.NODE_ENV === "production") {
-//   console.log("production");
-//   app.use(express.static("bloggy/build"));
-//   app.get("*", (req, res) => {
-//     res.sendFile(path.join(__dirname, "bloggy/build/index.html"));
-//   });
-// }
+/////////////////////////////////////TOKEN//////////////////////////////////////////
 
 app.post("/auth", (req, res) => {
   console.log("enter");
@@ -84,6 +51,8 @@ app.post("/auth", (req, res) => {
   console.log("enter1");
 });
 
+////////////////////////////////////USER//////////////////////////////////////////
+
 app.post("/user", (req, res) => {
   fetch(`https://api.github.com/graphql`, {
     method: "POST",
@@ -106,10 +75,7 @@ app.post("/user", (req, res) => {
     
   }
 }
-
-
-
-      `,
+ `,
     }),
     headers: {
       Authorization: "token " + req.body.token,
@@ -125,6 +91,8 @@ app.post("/user", (req, res) => {
       return res.json(error);
     });
 });
+
+/////////////////////////////////////REPOSITORIES//////////////////////////////////////////
 
 app.post("/repo", (req, res) => {
   console.log(req.body.page);
@@ -148,11 +116,7 @@ app.post("/repo", (req, res) => {
       }
     }
   }
-}
-
-
-
-      `,
+} `,
     }),
     headers: {
       Authorization: "token " + req.body.token,
@@ -168,6 +132,8 @@ app.post("/repo", (req, res) => {
       return res.json(error);
     });
 });
+
+/////////////////////////////////////REPOSITORY DETAIL//////////////////////////////////////////
 
 app.post("/repoDetail", (req, res) => {
   console.log(req.body.id);
@@ -216,6 +182,8 @@ app.post("/repoDetail", (req, res) => {
     });
 });
 
+/////////////////////////////////////UPDATE//////////////////////////////////////////
+
 app.post("/update", (req, res) => {
   console.log(req.body.id);
   fetch(`https://api.github.com/graphql`, {
@@ -228,8 +196,6 @@ mutation {
     clientMutationId
   }
 }
-
-
 
       `,
     }),
@@ -247,6 +213,8 @@ mutation {
       return res.json(error);
     });
 });
+
+/////////////////////////////////////ISSUE //////////////////////////////////////////
 
 app.post("/issue", (req, res) => {
   console.log(req.body.id);
@@ -274,10 +242,7 @@ app.post("/issue", (req, res) => {
       }
     }
   }
-}
-
-
-      `,
+}  `,
     }),
     headers: {
       Authorization: "token " + req.body.token,

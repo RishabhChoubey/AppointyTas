@@ -9,6 +9,8 @@ const Container = (props) => {
   const token = Cookies.getJSON("token");
   const history = useHistory();
 
+  /////////////////////////////////////USE EFFECT//////////////////////////////////////////
+
   useEffect(() => {
     if (!token) {
       history.push("/");

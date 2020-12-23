@@ -10,8 +10,10 @@ import { useHistory } from "react-router-dom";
 const UsrDetail = () => {
   const [viewer, setviewer] = useState({});
   const token = Cookies.getJSON("token");
-  console.log("token", token);
   const history = useHistory();
+
+  /////////////////////////////////////USE EFFECT//////////////////////////////////////////
+
   useEffect(() => {
     if (!token) {
       history.push("/");
@@ -20,6 +22,8 @@ const UsrDetail = () => {
       token: token,
     }).then((data) => setviewer(data.data.viewer));
   }, []);
+
+  ///////////////////////////////////// LOGOUT //////////////////////////////////////////
 
   const logout = () => {
     Cookies.remove("token");

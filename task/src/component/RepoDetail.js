@@ -79,7 +79,7 @@ const RepoDetail = (props) => {
     e.preventDefault();
     console.log("submit");
 
-    const { data } = await Axios.post("http://localhost:2000/update", {
+    const { data } = await Axios.post("/update", {
       token: token,
       name: name,
       des: des,

@@ -14,6 +14,9 @@ const Repo = (props) => {
   const [pagenum, setpagenum] = useState(5);
   const [paginate, setpaginate] = useState(true);
   const history = useHistory();
+
+  /////////////////////////////////////USE EFFECT//////////////////////////////////////////
+
   useEffect(() => {
     if (!token) {
       history.push("/");
@@ -22,12 +25,13 @@ const Repo = (props) => {
     if (loading) loadmore();
   }, [loading]);
 
+  ///////////////////////////////////// LOADING REPOSITORY//////////////////////////////////////////
+
   const loadmore = async () => {
-    console.log(pagenum, paginate);
     if (paginate) {
       const {
         data: { data, message },
-      } = await Axios.post("http://localhost:2000/repo", {
+      } = await Axios.post("/repo", {
         token: token,
         page: pagenum,
       });
@@ -45,6 +49,9 @@ const Repo = (props) => {
     }
     setloading(false);
   };
+
+  ///////////////////////////////////// SCROLL //////////////////////////////////////////
+
   const scroll = (e) => {
     const { scrollTop, clientHeight, scrollHeight } = e.currentTarget;
 
