@@ -1,0 +1,81 @@
+.up_con {
+  background-color: black;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  min-height: 100vh;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.45);
+  border-left: 1px solid rgba(255, 255, 255, 0.45);
+  z-index: 1;
+}
+
+.name,
+.des,
+.createdAt,
+.updatedAt,
+.url,
+.collb,
+.issue {
+  color: white;
+  margin: 20px;
+}
+.collb {
+  text-transform: uppercase;
+}
+.collb_name {
+  color: white;
+  margin: 10px;
+}
+.li_con {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: auto;
+}
+
+.button {
+  width: 60px;
+  color: white;
+  background-color: teal;
+  margin-top: 30px;
+}
+
+.des {
+  height: auto;
+  width: 300px;
+  word-wrap: normal;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.label {
+  color: white;
+  margin: 10px;
+}
+.area {
+  height: 200px;
+}
+.circle {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 65%;
+  left: 55%;
+  height: 200px;
+  width: 200px;
+  border-radius: 100%;
+  background-color: violet;
+}

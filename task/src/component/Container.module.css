@@ -1,0 +1,77 @@
+.container {
+  background: black;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+.UserCom {
+  position: relative;
+  width: 40%;
+
+  align-items: center;
+}
+.RepoCom {
+  position: relative;
+  width: 60%;
+}
+.user_detail {
+  display: flex;
+
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  align-items: center;
+
+  overflow-y: hidden;
+
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 20px;
+  /* border-top: 1px solid rgba(255, 255, 255, 0.45);
+  border-right: 1px solid rgba(255, 255, 255, 0.45); */
+}
+.user_repo {
+  height: 100vh;
+  flex-direction: column;
+  width: 100%;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  z-index: 1;
+}
+.user_img {
+  height: 40%;
+  width: 60%;
+  border-radius: 100%;
+  margin: 10px;
+  border: 2px white dotted;
+  color: white;
+}
+.user_name,
+.follower,
+.following {
+  color: white;
+  margin: 10px;
+}
+.detail_con {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: auto;
+  width: auto;
+}
+
+.circle {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 65%;
+  left: 20%;
+  height: 200px;
+  width: 200px;
+  border-radius: 100%;
+  background-color: violet;
+}
