@@ -25,6 +25,9 @@ const IssuePage = (props) => {
   return (
     <div className={Style.container}>
       <div className={Style.circle}></div>
+      <div className={Style.circle2}></div>
+      <div className={Style.circle3}></div>
+      <div className={Style.circle4}></div>
       <div className={Style.sub_con}>
         {issue ? (
           issue.issues.nodes.length > 0 ? (

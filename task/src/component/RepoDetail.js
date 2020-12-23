@@ -101,8 +101,10 @@ const RepoDetail = (props) => {
 
   return (
     <div className={Style.up_con}>
-      {" "}
       <div className={Style.circle}></div>
+      <div className={Style.circle2}></div>
+      <div className={Style.circle3}></div>
+      <div className={Style.circle4}></div>
       {repo ? (
         <div className={Style.container}>
           <div className={Style.name}>{repo.name}</div>

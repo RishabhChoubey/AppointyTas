@@ -1,5 +1,7 @@
 .up_con {
   background-color: black;
+  overflow: hidden;
+  position: relative;
 }
 
 .container {
@@ -74,13 +76,46 @@
 .area {
   height: 200px;
 }
+
 .circle {
   position: absolute;
   transform: translate(-50%, -50%);
-  top: 65%;
-  left: 55%;
+  top: 0;
+  left: 50px;
   height: 200px;
   width: 200px;
   border-radius: 100%;
   background-color: violet;
+}
+
+.circle2 {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  bottom: -300px;
+  left: 50px;
+  height: 400px;
+  width: 400px;
+  border-radius: 100%;
+  background-color: purple;
+}
+
+.circle3 {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  bottom: -520px;
+  right: 50px;
+  height: 600px;
+  width: 600px;
+  border-radius: 100%;
+  background-color: rgb(141, 17, 212);
+}
+.circle4 {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 20px;
+  right: 50px;
+  height: 300px;
+  width: 300px;
+  border-radius: 100%;
+  background-color: rgb(219, 12, 74);
 }

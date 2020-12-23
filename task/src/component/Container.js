@@ -17,6 +17,9 @@ const Container = (props) => {
   return (
     <div className={Style.container}>
       <div className={Style.circle}></div>
+      <div className={Style.circle2}></div>
+      <div className={Style.circle3}></div>
+      <div className={Style.circle4}></div>
       <div className={Style.UserCom}>
         <UserDetail></UserDetail>
       </div>
