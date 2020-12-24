@@ -41,6 +41,7 @@ a {
 .name:hover,
 .createdAt:hover,
 .url:hover {
+  color: rgb(255, 255, 5);
   transform: scale(1.1);
 }
 

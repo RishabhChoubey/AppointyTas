@@ -100,6 +100,7 @@
 .follower:hover,
 .following:hover,
 .logout:hover {
+  color: rgb(255, 255, 5);
   transform: scale(1.1);
 }
 
