@@ -76,7 +76,7 @@ const Repo = () => {
           <Message name={"No Repository"} />
         )
       ) : (
-        <Message name={"Loding..."} />
+        <Message name={"Loading..."} />
       )}
     </React.Fragment>
   );
