@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Axios from "axios";
 import Style from "./IssuePage.module.css";
 import Message from "./Message";
@@ -9,22 +9,22 @@ const IssuePage = (props) => {
   const id = props.match.params.id;
   const [issue, setissue] = useState();
 
-  /////////////////////////////////////USE EFFECT//////////////////////////////////////////
-
-  useEffect(() => {
-    issueLoad();
-  }, []);
-
   ///////////////////////////////////// ISSUE LAODING//////////////////////////////////////////
 
-  const issueLoad = async () => {
+  const issueLoad = useCallback(async () => {
     const { data } = await Axios.post("/issue", {
       token: token,
       id: id,
     });
 
     if (data.data.viewer.repository) setissue(data.data.viewer.repository);
-  };
+  }, [id, token]);
+
+  /////////////////////////////////////USE EFFECT//////////////////////////////////////////
+
+  useEffect(() => {
+    issueLoad();
+  }, [issueLoad]);
 
   return (
     <div className={Style.container}>

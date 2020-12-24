@@ -3,7 +3,6 @@ import Style from "./Container.module.css";
 import Message from "./Message";
 import Axios from "axios";
 import Cookies from "js-cookie";
-import { User } from "feather-icons-react";
 import { UserIcon, LogoutIcon } from "../icon/Icon";
 import { useHistory } from "react-router-dom";
 
@@ -21,7 +20,7 @@ const UsrDetail = () => {
     Axios.post("/user", {
       token: token,
     }).then((data) => setviewer(data.data.viewer));
-  }, []);
+  }, [token, history]);
 
   ///////////////////////////////////// LOGOUT //////////////////////////////////////////
 
@@ -34,20 +33,20 @@ const UsrDetail = () => {
     <React.Fragment>
       {viewer && viewer.followers ? (
         <div className={Style.user_detail}>
-          <img src={viewer.avatarUrl} className={Style.user_img} />
+          <img src={viewer.avatarUrl} className={Style.user_img} alt="" />
           <div className={Style.detail_con}>
             <div className={Style.user_name}>{viewer.login}</div>
             <div className={Style.bio}>{viewer.bio}</div>
             <div className={Style.follower}>
-              <img src={UserIcon} className={Style.icon} />
+              <img src={UserIcon} className={Style.icon} alt="" />
               {viewer.followers.totalCount} follower
             </div>
             <div className={Style.following}>
-              <img src={UserIcon} className={Style.icon} />{" "}
+              <img src={UserIcon} className={Style.icon} alt="" />{" "}
               {viewer.following.totalCount} following
             </div>
             <div className={Style.logout} onClick={() => logout()}>
-              <img src={LogoutIcon} className={Style.icon} /> Logout
+              <img src={LogoutIcon} className={Style.icon} alt="" /> Logout
             </div>
           </div>
         </div>

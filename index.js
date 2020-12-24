@@ -2,12 +2,11 @@ const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const axios = require("axios");
 const fetch = require("node-fetch");
 const FormData = require("form-data");
 const { json } = require("body-parser");
-
 const app = express();
+
 ///////////////middleware//////////////////////////////////////////////////
 
 app.use(cors());
@@ -22,8 +21,6 @@ app.use((req, res, next) => {
 /////////////////////////////////////TOKEN//////////////////////////////////////////
 
 app.post("/auth", (req, res) => {
-  console.log("enter");
-
   const { client_id, client_secret, code } = req.body;
 
   const data = new FormData();
@@ -84,7 +81,6 @@ app.post("/user", (req, res) => {
   })
     .then((res) => res.json())
     .then((data) => {
-      console.log(data);
       return res.json(data.data);
     })
     .catch((error) => {
@@ -125,7 +121,6 @@ app.post("/repo", (req, res) => {
   })
     .then((res) => res.json())
     .then((data) => {
-      console.log(data);
       return res.json(data);
     })
     .catch((error) => {
@@ -174,7 +169,6 @@ app.post("/repoDetail", (req, res) => {
   })
     .then((res) => res.json())
     .then((data) => {
-      console.log(data);
       return res.json(data.data);
     })
     .catch((error) => {
@@ -206,7 +200,6 @@ mutation {
   })
     .then((res) => res.json())
     .then((data) => {
-      console.log(data);
       return res.json(data);
     })
     .catch((error) => {
@@ -251,7 +244,6 @@ app.post("/issue", (req, res) => {
   })
     .then((res) => res.json())
     .then((data) => {
-      console.log(data);
       return res.json(data);
     })
     .catch((error) => {

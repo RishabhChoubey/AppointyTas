@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Route } from "react-router-dom";
 import Login from "../component/Login";
 import Container from "../component/Container";
@@ -7,7 +7,7 @@ import IssuePage from "../component/IssuePage";
 import { useHistory } from "react-router-dom";
 import RepoDetail from "../component/RepoDetail";
 
-const Router = (props) => {
+const Router = () => {
   const history = useHistory();
 
   /////////////////////////////////////USE EFFECT//////////////////////////////////////////
@@ -23,7 +23,7 @@ const Router = (props) => {
         }
       }
     });
-  }, []);
+  }, [history]);
 
   return (
     <div>

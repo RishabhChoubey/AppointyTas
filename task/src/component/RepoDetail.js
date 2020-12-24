@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useCallback } from "react";
 import Style from "./RepoDetail.module.css";
 import Axios from "axios";
-import Cookies, { set } from "js-cookie";
+import Cookies from "js-cookie";
 import Message from "./Message";
 import { Link } from "react-router-dom";
-import { EditIcon, UpdateIcon, CancelIcon } from "../icon/Icon";
 
 const RepoDetail = (props) => {
   const [repo, setrepo] = useState();
@@ -15,15 +14,28 @@ const RepoDetail = (props) => {
   let id = props.match.params.id;
   console.log(id);
 
-  if (name != "") {
+  if (name !== "") {
     id = name;
   }
+
+  const detail = useCallback(async () => {
+    const { data } = await Axios.post("/repoDetail", {
+      token: token,
+      id: id,
+    });
+
+    if (data.viewer.repository) {
+      setrepo(data.viewer.repository);
+      setname(data.viewer.repository.name);
+      setdes(data.viewer.repository.description);
+    }
+  }, [token, id]);
 
   ////////////////////////////////////////USE EFFECT//////////////////////////
   useEffect(() => {
     detail();
     console.log(edit);
-  }, [edit]);
+  }, [edit, detail]);
 
   ////////////////////////////////////////EDIT TO OPEN EDIT SECTION//////////////////////////
   const editData = () => {
@@ -35,20 +47,6 @@ const RepoDetail = (props) => {
   };
 
   ////////////////////////////////////////REPOSITORY FETCH METHOD//////////////////////////
-
-  const detail = async () => {
-    const { data } = await Axios.post("/repoDetail", {
-      token: token,
-      id: id,
-    });
-    console.log(data, "detail data");
-    if (data.viewer.repository) {
-      setrepo(data.viewer.repository);
-      setname(data.viewer.repository.name);
-      setdes(data.viewer.repository.description);
-    }
-  };
-  console.log(repo);
 
   ////////////////////////////////////////EDIT FORM//////////////////////////
   const updateForm = () => {
@@ -90,7 +88,6 @@ const RepoDetail = (props) => {
     if (!data.errors) {
       setedit(false);
       console.log("after submit", name);
-      //  props.history.push("/detail/" + name);
     }
   };
 

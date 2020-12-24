@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Style from "./Container.module.css";
 import Card from "./Card";
 import Axios from "axios";
 import { useHistory } from "react-router-dom";
 import Cookies from "js-cookie";
-import debounce from "lodash.debounce";
+
 import Message from "./Message";
 
-const Repo = (props) => {
+const Repo = () => {
   const [loading, setloading] = useState(true);
   const token = Cookies.getJSON("token");
   const [repo, setrepo] = useState();
@@ -15,19 +15,9 @@ const Repo = (props) => {
   const [paginate, setpaginate] = useState(true);
   const history = useHistory();
 
-  /////////////////////////////////////USE EFFECT//////////////////////////////////////////
-
-  useEffect(() => {
-    if (!token) {
-      history.push("/");
-    }
-
-    if (loading) loadmore();
-  }, [loading]);
-
   ///////////////////////////////////// LOADING REPOSITORY//////////////////////////////////////////
 
-  const loadmore = async () => {
+  const loadmore = useCallback(async () => {
     if (paginate) {
       const {
         data: { data, message },
@@ -48,7 +38,17 @@ const Repo = (props) => {
       setpagenum(curpage + 5);
     }
     setloading(false);
-  };
+  }, [history, token, paginate, pagenum]);
+
+  /////////////////////////////////////USE EFFECT//////////////////////////////////////////
+
+  useEffect(() => {
+    if (!token) {
+      history.push("/");
+    }
+
+    if (loading) loadmore();
+  }, [loading, history, token]);
 
   ///////////////////////////////////// SCROLL //////////////////////////////////////////
 
