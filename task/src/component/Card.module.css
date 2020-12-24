@@ -20,7 +20,7 @@
 .url {
   text-decoration: none;
   color: white;
-
+  margin: 10px;
   word-wrap: normal;
 }
 a {
